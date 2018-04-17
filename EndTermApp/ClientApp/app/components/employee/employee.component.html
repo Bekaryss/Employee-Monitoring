@@ -1,0 +1,115 @@
+﻿<div style="border: 1px solid red">employee Component</div>
+
+<p *ngIf="!employeeList"><em>Loading...</em></p>
+
+<h1>Angular 4 CRUD Example</h1>
+<h3 *ngIf="employeeIdToUpdate != -1; else create">
+    Update Article for Id: {{ employeeIdToUpdate }}
+</h3>
+<ng-template #create>
+    <h3> Create New Employee </h3>
+</ng-template>
+<div>
+    <form [formGroup]="employeeForm" (ngSubmit)="onEmployeeFormSubmit()">
+        <table class="table">
+            <tr>
+                <td>Enter FullName</td>
+                <td>
+                    <input formControlName="fullName">
+                    <label *ngIf="employeeForm.get('fullName').invalid && processValidation" [ngClass]="'error'"> FullName is required. </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter Position</td>
+                <td>
+                    <input formControlName="position">
+                    <label *ngIf="employeeForm.get('position').invalid && processValidation" [ngClass]="'error'"> Position is required. </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter iin</td>
+                <td>
+                    <input formControlName="iin">
+                    <label *ngIf="employeeForm.get('iin').invalid && processValidation" [ngClass]="'error'"> iin is required. </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Enter dayCount</td>
+                <td>
+                    <input formControlName="dayCount">
+                    <label *ngIf="employeeForm.get('dayCount').invalid && processValidation" [ngClass]="'error'"> dayCount is required. </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Enter startTime</td>
+                <td>
+                    <input type="time" formControlName="startTime">
+                    <label *ngIf="employeeForm.get('startTime').invalid && processValidation" [ngClass]="'error'"> dayCount is required. </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter endTime</td>
+                <td>
+                    <input type="time" formControlName="endTime">
+                    <label *ngIf="employeeForm.get('endTime').invalid && processValidation" [ngClass]="'error'"> dayCount is required. </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button *ngIf="employeeIdToUpdate == -1">CREATE</button>
+                    <button *ngIf="employeeIdToUpdate != -1">UPDATE</button>
+                    <button (click)="backToCreateEmployee()" *ngIf="employeeIdToUpdate != -1">Go Back</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br />
+    <div *ngIf="statusCode">
+        <!--else processing-->
+        <div *ngIf="statusCode === 201" [ngClass]="'success'">
+            Article added successfully.
+        </div>
+        <div *ngIf="statusCode === 409" [ngClass]="'success'">
+            Article already exists.
+        </div>
+        <div *ngIf="statusCode === 200" [ngClass]="'success'">
+            Article updated successfully.
+        </div>
+        <div *ngIf="statusCode === 204" [ngClass]="'success'">
+            Article deleted successfully.
+        </div>
+        <div *ngIf="statusCode === 500" [ngClass]="'error'">
+            Internal Server Error.
+        </div>
+    </div>
+</div>
+
+<h3>Employee Details</h3>
+<table  class='table' *ngIf="employeeList">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>FullName</th>
+            <th>IIN</th>
+            <th>Position</th>
+            <th>StartTime</th>
+            <th>EndTime</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of employeeList">
+            <td>{{ item.id }}</td>
+            <td>{{ item.fullName }}</td>
+            <td>{{ item.iin }}</td>
+            <td>{{ item.position }}</td>
+            <td>{{ item.startTime }}</td>
+            <td>{{ item.endTime }}</td>
+            <td><button type="button" (click)="loadEmployeeToEdit(item.id)">Edit</button> </td>
+            <td><button type="button" (click)="deleteEmployee(item.id)">Delete</button></td>
+        </tr>
+        </tbody>
+</table>

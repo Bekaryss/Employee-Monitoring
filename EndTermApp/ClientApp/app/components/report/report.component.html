@@ -1,0 +1,32 @@
+﻿<div style="border: 1px solid red">report Component</div>
+<h4>Report</h4>
+<p *ngIf="!reportList"><em>Loading...</em></p>
+
+<table class='table' *ngIf="reportList">
+    <thead>
+        <tr>
+            <th>Week</th>
+            <th>FullName</th>
+            <th>EmployeeId</th>
+            <th>Day</th>
+            <th>LateCount</th>
+            <th>MissCount</th>
+            <th>EarlyLeaveCount</th>
+            <th>TotalWorkHour</th>
+            <th>Overhours</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of reportList">
+            <td>{{ item.week }}</td>
+            <td>{{ item.fullName }}</td>
+            <td>{{ item.employeeId }}</td>     
+            <td>{{ item.day }}</td>
+            <td>{{ item.lateCount }}</td>
+            <td>{{ item.missCount }}</td>
+            <td>{{ item.earlyLeaveCount }}</td>
+            <td>{{ item.totalWorkHour }}</td>
+            <td>{{ item.overhours }}</td>
+        </tr>
+    </tbody>
+</table>

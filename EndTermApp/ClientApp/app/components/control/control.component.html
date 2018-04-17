@@ -1,0 +1,108 @@
+﻿<div style="border: 1px solid red">control Component</div>
+
+
+<ng-template #create>
+    <h3> Create New Control </h3>
+</ng-template>
+<div>
+    <form [formGroup]="controlForm" (ngSubmit)="onControlFormSubmit()">
+        <table class="table">
+            <tr>
+                <td>Select Employee</td>
+                <td>
+                    <select formControlName="employeeId">
+                        <option *ngFor="let employee of employeeList" [ngValue]="employee.id">{{ employee.fullName }}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter week</td>
+                <td>
+                    <input formControlName="week">
+                    <label *ngIf="controlForm.get('week').invalid && processValidation" [ngClass]="'error'"> week is required. </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter day</td>
+                <td>
+                    <input formControlName="day">
+                    <label *ngIf="controlForm.get('day').invalid && processValidation" [ngClass]="'error'"> day is required. </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Enter startTime</td>
+                <td>
+                    <input type="time" formControlName="startTime">
+                    <label *ngIf="controlForm.get('startTime').invalid && processValidation" [ngClass]="'error'"> startTime is required. </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Enter endTime</td>
+                <td>
+                    <input type="time" formControlName="endTime">
+                    <label *ngIf="controlForm.get('endTime').invalid && processValidation" [ngClass]="'error'"> endTime is required. </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button *ngIf="controlIdToUpdate == -1">CREATE</button>
+                    <button *ngIf="controlIdToUpdate != -1">UPDATE</button>
+                    <button (click)="backToCreateControl()" *ngIf="controlIdToUpdate != -1">Go Back</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br />
+    <div *ngIf="statusCode">
+        <!--else processing-->
+        <div *ngIf="statusCode === 201" [ngClass]="'success'">
+            Control added successfully.
+        </div>
+        <div *ngIf="statusCode === 409" [ngClass]="'success'">
+            Control already exists.
+        </div>
+        <div *ngIf="statusCode === 200" [ngClass]="'success'">
+            Control updated successfully.
+        </div>
+        <div *ngIf="statusCode === 204" [ngClass]="'success'">
+            Control deleted successfully.
+        </div>
+        <div *ngIf="statusCode === 500" [ngClass]="'error'">
+            Internal Server Error.
+        </div>
+    </div>
+</div>
+
+
+
+<p *ngIf="!controlList"><em>Loading...</em></p>
+
+<table class='table' *ngIf="controlList">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>FullName</th>
+            <th>EmployeeId</th>
+            <th>startTime</th>
+            <th>endTime</th>
+            <th>week</th>
+            <th>day</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of controlList">
+            <td>{{ item.id }}</td>
+            <td>{{ item.employee.fullName }}</td>
+            <td>{{ item.employeeId }}</td>
+            <td>{{ item.startTime }}</td>
+            <td>{{ item.endTime }}</td>
+            <td>{{ item.week }}</td>
+            <td>{{ item.day }}</td>
+            <td><button type="button" (click)="loadControlToEdit(item.id)">Edit</button> </td>
+            <td><button type="button" (click)="deleteControl(item.id)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
