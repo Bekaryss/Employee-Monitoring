@@ -28,13 +28,11 @@ export class EmployeeComponent {
         startTime: new FormControl('', Validators.required), 
         endTime: new FormControl('', Validators.required)
     });
-   //startTime
-   //endTime
 
     //Create constructor to get service instance
     constructor(private employeeService: EmployeeService) { }
 
-    //Create ngOnInit() and and load articles
+
     ngOnInit(): void {
         this.getAllEmployees();
     }   
@@ -44,7 +42,7 @@ export class EmployeeComponent {
             errorCode => this.statusCode = errorCode);
     }
 
-    //Handle create and update article
+
     onEmployeeFormSubmit() {
         this.processValidation = true;
         if (this.employeeForm.invalid) {
@@ -55,7 +53,7 @@ export class EmployeeComponent {
         let employee = this.employeeForm.value;
         console.log(employee);
         if (this.employeeIdToUpdate == -1) {
-            //Generate article id then create article
+
             this.employeeService.createEmployee(employee)
                 .subscribe(successCode => {
                     this.statusCode = successCode;
@@ -65,7 +63,7 @@ export class EmployeeComponent {
                 errorCode => this.statusCode = errorCode
                 );
         } else {
-            //Handle update article
+
             employee.id = this.employeeIdToUpdate;
             this.employeeService.updateEmployee(employee)
                 .subscribe(successCode => {
@@ -76,7 +74,7 @@ export class EmployeeComponent {
                 errorCode => this.statusCode = errorCode);
         }
     }
-    //Load article by id to edit
+
     loadEmployeeToEdit(articleId: string) {
         this.preProcessConfigurations();
         this.employeeService.getEmployeeById(articleId)
@@ -100,13 +98,12 @@ export class EmployeeComponent {
             },
             errorCode => this.statusCode = errorCode);
     }
-    //Delete article
+
     deleteEmployee(employeeId: string) {
         this.preProcessConfigurations();
         this.employeeService.deleteEmployeeById(employeeId)
             .subscribe(successCode => {
-                //this.statusCode = successCode;
-                //Expecting success code 204 from server
+
                 this.statusCode = 204;
                 this.getAllEmployees();
                 this.backToCreateEmployee();

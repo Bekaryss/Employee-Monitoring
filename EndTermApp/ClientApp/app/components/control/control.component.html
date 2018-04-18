@@ -1,8 +1,9 @@
 ﻿<div style="border: 1px solid red">control Component</div>
 
+<h1>Control Admin Page</h1>
 
 <ng-template #create>
-    <h3> Create New Control </h3>
+    <h3>Create New Control </h3>
 </ng-template>
 <div>
     <form [formGroup]="controlForm" (ngSubmit)="onControlFormSubmit()">
@@ -16,32 +17,32 @@
                 </td>
             </tr>
             <tr>
-                <td>Enter week</td>
+                <td>Enter Week</td>
                 <td>
-                    <input formControlName="week">
-                    <label *ngIf="controlForm.get('week').invalid && processValidation" [ngClass]="'error'"> week is required. </label>
+                    <input type="number" formControlName="week" min="1" max="5">
+                    <label *ngIf="controlForm.get('week').invalid && processValidation" [ngClass]="'error'">Week is required. </label>
                 </td>
             </tr>
             <tr>
-                <td>Enter day</td>
+                <td>Enter Day</td>
                 <td>
-                    <input formControlName="day">
-                    <label *ngIf="controlForm.get('day').invalid && processValidation" [ngClass]="'error'"> day is required. </label>
+                    <input type="number" formControlName="day" min="1" max="7">
+                    <label *ngIf="controlForm.get('day').invalid && processValidation" [ngClass]="'error'">Day is required. </label>
                 </td>
             </tr>
 
             <tr>
-                <td>Enter startTime</td>
+                <td>Enter Start Time</td>
                 <td>
                     <input type="time" formControlName="startTime">
-                    <label *ngIf="controlForm.get('startTime').invalid && processValidation" [ngClass]="'error'"> startTime is required. </label>
+                    <label *ngIf="controlForm.get('startTime').invalid && processValidation" [ngClass]="'error'">Start Time is required. </label>
                 </td>
             </tr>
             <tr>
-                <td>Enter endTime</td>
+                <td>Enter End Time</td>
                 <td>
                     <input type="time" formControlName="endTime">
-                    <label *ngIf="controlForm.get('endTime').invalid && processValidation" [ngClass]="'error'"> endTime is required. </label>
+                    <label *ngIf="controlForm.get('endTime').invalid && processValidation" [ngClass]="'error'">End Time is required. </label>
                 </td>
             </tr>
             <tr>
@@ -73,8 +74,6 @@
         </div>
     </div>
 </div>
-
-
 
 <p *ngIf="!controlList"><em>Loading...</em></p>
 

@@ -1,13 +1,13 @@
 ﻿<div style="border: 1px solid red">employee Component</div>
 
-<p *ngIf="!employeeList"><em>Loading...</em></p>
 
-<h1>Angular 4 CRUD Example</h1>
+
+<h1>Employee Admin Page</h1>
 <h3 *ngIf="employeeIdToUpdate != -1; else create">
     Update Article for Id: {{ employeeIdToUpdate }}
 </h3>
 <ng-template #create>
-    <h3> Create New Employee </h3>
+    <h3>Create New Employee </h3>
 </ng-template>
 <div>
     <form [formGroup]="employeeForm" (ngSubmit)="onEmployeeFormSubmit()">
@@ -16,44 +16,44 @@
                 <td>Enter FullName</td>
                 <td>
                     <input formControlName="fullName">
-                    <label *ngIf="employeeForm.get('fullName').invalid && processValidation" [ngClass]="'error'"> FullName is required. </label>
+                    <label *ngIf="employeeForm.get('fullName').invalid && processValidation" [ngClass]="'error'">FullName is required. </label>
                 </td>
             </tr>
             <tr>
                 <td>Enter Position</td>
                 <td>
                     <input formControlName="position">
-                    <label *ngIf="employeeForm.get('position').invalid && processValidation" [ngClass]="'error'"> Position is required. </label>
+                    <label *ngIf="employeeForm.get('position').invalid && processValidation" [ngClass]="'error'">Position is required. </label>
                 </td>
             </tr>
             <tr>
-                <td>Enter iin</td>
+                <td>Enter IIN</td>
                 <td>
                     <input formControlName="iin">
-                    <label *ngIf="employeeForm.get('iin').invalid && processValidation" [ngClass]="'error'"> iin is required. </label>
+                    <label *ngIf="employeeForm.get('iin').invalid && processValidation" [ngClass]="'error'">IIN is required. </label>
                 </td>
             </tr>
 
             <tr>
-                <td>Enter dayCount</td>
+                <td>Enter Day Count</td>
                 <td>
-                    <input formControlName="dayCount">
-                    <label *ngIf="employeeForm.get('dayCount').invalid && processValidation" [ngClass]="'error'"> dayCount is required. </label>
+                    <input type="number" formControlName="dayCount" min="1" max="7">
+                    <label *ngIf="employeeForm.get('dayCount').invalid && processValidation" [ngClass]="'error'">Day Count is required. </label>
                 </td>
             </tr>
 
             <tr>
-                <td>Enter startTime</td>
+                <td>Enter Start Time</td>
                 <td>
                     <input type="time" formControlName="startTime">
-                    <label *ngIf="employeeForm.get('startTime').invalid && processValidation" [ngClass]="'error'"> dayCount is required. </label>
+                    <label *ngIf="employeeForm.get('startTime').invalid && processValidation" [ngClass]="'error'"> Start Time is required. </label>
                 </td>
             </tr>
             <tr>
-                <td>Enter endTime</td>
+                <td>Enter End Time</td>
                 <td>
                     <input type="time" formControlName="endTime">
-                    <label *ngIf="employeeForm.get('endTime').invalid && processValidation" [ngClass]="'error'"> dayCount is required. </label>
+                    <label *ngIf="employeeForm.get('endTime').invalid && processValidation" [ngClass]="'error'"> End Time is required. </label>
                 </td>
             </tr>
             <tr>
@@ -86,7 +86,9 @@
     </div>
 </div>
 
-<h3>Employee Details</h3>
+<p *ngIf="!employeeList"><em>Loading...</em></p>
+
+<h3>Employee List</h3>
 <table  class='table' *ngIf="employeeList">
     <thead>
         <tr>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,7 +13,9 @@ namespace EndTermApp.Models
         public Employee Employee { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        [Range(1, 7)]
         public int Day { get; set; }
+        [Range(1, 5)]
         public int Week { get; set; }
     }
 }
